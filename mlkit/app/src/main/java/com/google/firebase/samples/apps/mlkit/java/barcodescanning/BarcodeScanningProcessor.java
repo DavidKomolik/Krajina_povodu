@@ -17,11 +17,13 @@ import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode;
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetector;
+import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetectorOptions;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.samples.apps.mlkit.common.CameraImageGraphic;
 import com.google.firebase.samples.apps.mlkit.common.FrameMetadata;
@@ -43,9 +45,9 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
     public BarcodeScanningProcessor() {
         // Note that if you know which format of barcode your app is dealing with, detection will be
         // faster to specify the supported barcode formats one by one, e.g.
-        // new FirebaseVisionBarcodeDetectorOptions.Builder()
-        //     .setBarcodeFormats(FirebaseVisionBarcode.FORMAT_QR_CODE)
-        //     .build();
+         new FirebaseVisionBarcodeDetectorOptions.Builder()
+             .setBarcodeFormats(FirebaseVisionBarcode.FORMAT_EAN_13,FirebaseVisionBarcode.FORMAT_EAN_8)
+             .build();
         detector = FirebaseVision.getInstance().getVisionBarcodeDetector();
     }
 
@@ -74,12 +76,17 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
             CameraImageGraphic imageGraphic = new CameraImageGraphic(graphicOverlay, originalCameraImage);
             graphicOverlay.add(imageGraphic);
         }
-        for (int i = 0; i < barcodes.size(); ++i) {
+        for (int i = 0; i < barcodes.size(); ++i) { //maybe i < 2  -> dont want to support multiple barcodes
             FirebaseVisionBarcode barcode = barcodes.get(i);
             BarcodeGraphic barcodeGraphic = new BarcodeGraphic(graphicOverlay, barcode);
             graphicOverlay.add(barcodeGraphic);
+            Log.d(TAG,"sucess PRESIEL SOM ");
         }
         graphicOverlay.postInvalidate();
+
+       // Database d = new Database();
+
+
     }
 
     @Override
