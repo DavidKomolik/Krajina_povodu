@@ -1,5 +1,6 @@
 package com.firebase.example.internal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ public abstract class BaseEntryChoiceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_entry_choice);
 
         mRecycler = findViewById(R.id.choices_recycler);

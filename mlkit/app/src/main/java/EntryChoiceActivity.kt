@@ -21,4 +21,6 @@ class EntryChoiceActivity : BaseEntryChoiceActivity() {
                                 com.google.firebase.samples.apps.mlkit.kotlin.ChooserActivity::class.java))
         )
     }
+
+
 }
