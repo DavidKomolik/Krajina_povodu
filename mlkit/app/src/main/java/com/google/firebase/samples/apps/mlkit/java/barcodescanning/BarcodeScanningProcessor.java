@@ -13,6 +13,7 @@
 // limitations under the License.
 package com.google.firebase.samples.apps.mlkit.java.barcodescanning;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -30,6 +31,9 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.samples.apps.mlkit.common.CameraImageGraphic;
 import com.google.firebase.samples.apps.mlkit.common.FrameMetadata;
 import com.google.firebase.samples.apps.mlkit.common.GraphicOverlay;
+import com.google.firebase.samples.apps.mlkit.java.LivePreviewActivity;
+import com.google.firebase.samples.apps.mlkit.java.SuccessActivity;
+import com.google.firebase.samples.apps.mlkit.java.SuccessHandler;
 import com.google.firebase.samples.apps.mlkit.java.VisionProcessorBase;
 
 import java.io.IOException;
@@ -41,17 +45,20 @@ import java.util.List;
 public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseVisionBarcode>> {
 
     private static final String TAG = "BarcodeScanProc";
-
+    private SuccessHandler handler;
     private final FirebaseVisionBarcodeDetector detector;
     private SQLiteDatabase databazka;
+    private LivePreviewActivity context;
 
-    public BarcodeScanningProcessor(SQLiteDatabase database) {
+    public BarcodeScanningProcessor(LivePreviewActivity livePreviewActivity, SQLiteDatabase database) {
+        context = livePreviewActivity;
         // Note that if you know which format of barcode your app is dealing with, detection will be
         // faster to specify the supported barcode formats one by one, e.g.
-         new FirebaseVisionBarcodeDetectorOptions.Builder()
-             .setBarcodeFormats(FirebaseVisionBarcode.FORMAT_EAN_13,FirebaseVisionBarcode.FORMAT_EAN_8)
-             .build();
+        new FirebaseVisionBarcodeDetectorOptions.Builder()
+                .setBarcodeFormats(FirebaseVisionBarcode.FORMAT_EAN_13,FirebaseVisionBarcode.FORMAT_EAN_8)
+                .build();
         databazka = database;
+        this.handler = new SuccessHandler(databazka,this);
         detector = FirebaseVision.getInstance().getVisionBarcodeDetector();
 
     }
@@ -86,16 +93,13 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
 
             BarcodeGraphic barcodeGraphic = new BarcodeGraphic(graphicOverlay, barcode);
             graphicOverlay.add(barcodeGraphic);
-            Cursor c = databazka.rawQuery("SELECT KRAJINA FROM EAN_KOD WHERE _id = " + (barcode.getRawValue().substring(0,3)),null);
-            c.moveToFirst();
-            String vysledok = c.getString(0);
-            Log.d(TAG,"Precitane : " + vysledok);
+            String action;
 
-
+            this.handler.spracujVysledok(barcode.getRawValue(),context);
         }
         graphicOverlay.postInvalidate();
 
-       // Database d = new Database();
+        // Database d = new Database();
 
 
     }

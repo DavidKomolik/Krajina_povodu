@@ -60,15 +60,11 @@ import java.util.List;
  * set up continuous frame processing on frames from a camera source. */
 @KeepName
 public final class LivePreviewActivity extends AppCompatActivity
-    implements OnRequestPermissionsResultCallback,
+        implements OnRequestPermissionsResultCallback,
         OnItemSelectedListener,
         CompoundButton.OnCheckedChangeListener {
-  private static final String FACE_DETECTION = "Face Detection";
-  private static final String TEXT_DETECTION = "Text Detection";
+
   private static final String BARCODE_DETECTION = "Barcode Detection";
-  private static final String IMAGE_LABEL_DETECTION = "Label Detection";
-  private static final String CLASSIFICATION_QUANT = "Classification (quantized)";
-  private static final String CLASSIFICATION_FLOAT = "Classification (float)";
   private static final String FACE_CONTOUR = "Face Contour";
   private static final String TAG = "LivePreviewActivity";
   private static final int PERMISSION_REQUESTS = 1;
@@ -101,13 +97,9 @@ public final class LivePreviewActivity extends AppCompatActivity
 
     Spinner spinner = (Spinner) findViewById(R.id.spinner);
     List<String> options = new ArrayList<>();
-//    options.add(FACE_CONTOUR);
-//    options.add(FACE_DETECTION);
-//    options.add(TEXT_DETECTION);
+
     options.add(BARCODE_DETECTION);
-//    options.add(IMAGE_LABEL_DETECTION);
-//    options.add(CLASSIFICATION_QUANT);
-//    options.add(CLASSIFICATION_FLOAT);
+
     // Creating adapter for spinner
     ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.spinner_style, options);
     // Drop down layout style - list view with radio button
@@ -186,43 +178,9 @@ public final class LivePreviewActivity extends AppCompatActivity
     if (cameraSource == null) {
       cameraSource = new CameraSource(this, graphicOverlay);
     }
+    Log.i(TAG, "Using Barcode Detector Processor");
+    cameraSource.setMachineLearningFrameProcessor(new BarcodeScanningProcessor(this,this.mDb));
 
-    try {
-      switch (model) {
-        case CLASSIFICATION_QUANT:
-          Log.i(TAG, "Using Custom Image Classifier (quant) Processor");
-          cameraSource.setMachineLearningFrameProcessor(new CustomImageClassifierProcessor(this, true));
-          break;
-        case CLASSIFICATION_FLOAT:
-          Log.i(TAG, "Using Custom Image Classifier (float) Processor");
-          cameraSource.setMachineLearningFrameProcessor(new CustomImageClassifierProcessor(this, false));
-          break;
-        case TEXT_DETECTION:
-          Log.i(TAG, "Using Text Detector Processor");
-          cameraSource.setMachineLearningFrameProcessor(new TextRecognitionProcessor());
-          break;
-        case FACE_DETECTION:
-          Log.i(TAG, "Using Face Detector Processor");
-          cameraSource.setMachineLearningFrameProcessor(new FaceDetectionProcessor(getResources()));
-          break;
-        case BARCODE_DETECTION:
-          Log.i(TAG, "Using Barcode Detector Processor");
-          cameraSource.setMachineLearningFrameProcessor(new BarcodeScanningProcessor(this.mDb));
-          break;
-        case IMAGE_LABEL_DETECTION:
-          Log.i(TAG, "Using Image Label Detector Processor");
-          cameraSource.setMachineLearningFrameProcessor(new ImageLabelingProcessor());
-          break;
-        case FACE_CONTOUR:
-          Log.i(TAG, "Using Face Contour Detector Processor");
-          cameraSource.setMachineLearningFrameProcessor(new FaceContourDetectorProcessor());
-          break;
-        default:
-          Log.e(TAG, "Unknown model: " + model);
-      }
-    } catch (FirebaseMLException e) {
-      Log.e(TAG, "can not create camera source: " + model);
-    }
   }
 
   /**
@@ -273,8 +231,8 @@ public final class LivePreviewActivity extends AppCompatActivity
   private String[] getRequiredPermissions() {
     try {
       PackageInfo info =
-          this.getPackageManager()
-              .getPackageInfo(this.getPackageName(), PackageManager.GET_PERMISSIONS);
+              this.getPackageManager()
+                      .getPackageInfo(this.getPackageName(), PackageManager.GET_PERMISSIONS);
       String[] ps = info.requestedPermissions;
       if (ps != null && ps.length > 0) {
         return ps;
@@ -305,7 +263,7 @@ public final class LivePreviewActivity extends AppCompatActivity
 
     if (!allNeededPermissions.isEmpty()) {
       ActivityCompat.requestPermissions(
-          this, allNeededPermissions.toArray(new String[0]), PERMISSION_REQUESTS);
+              this, allNeededPermissions.toArray(new String[0]), PERMISSION_REQUESTS);
     }
   }
 
@@ -321,7 +279,7 @@ public final class LivePreviewActivity extends AppCompatActivity
 
   private static boolean isPermissionGranted(Context context, String permission) {
     if (ContextCompat.checkSelfPermission(context, permission)
-        == PackageManager.PERMISSION_GRANTED) {
+            == PackageManager.PERMISSION_GRANTED) {
       Log.i(TAG, "Permission granted: " + permission);
       return true;
     }
