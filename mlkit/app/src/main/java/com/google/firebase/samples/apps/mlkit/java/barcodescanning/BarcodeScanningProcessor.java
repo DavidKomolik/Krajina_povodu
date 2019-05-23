@@ -27,7 +27,6 @@ import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode;
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetector;
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetectorOptions;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
-import com.google.firebase.samples.apps.mlkit.Databaza.DatabazaHelper;
 import com.google.firebase.samples.apps.mlkit.common.CameraImageGraphic;
 import com.google.firebase.samples.apps.mlkit.common.FrameMetadata;
 import com.google.firebase.samples.apps.mlkit.common.GraphicOverlay;
@@ -46,13 +45,13 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
     private final FirebaseVisionBarcodeDetector detector;
     private SQLiteDatabase databazka;
 
-    public BarcodeScanningProcessor(SQLiteDatabase databazaHelper) {
+    public BarcodeScanningProcessor(SQLiteDatabase database) {
         // Note that if you know which format of barcode your app is dealing with, detection will be
         // faster to specify the supported barcode formats one by one, e.g.
          new FirebaseVisionBarcodeDetectorOptions.Builder()
              .setBarcodeFormats(FirebaseVisionBarcode.FORMAT_EAN_13,FirebaseVisionBarcode.FORMAT_EAN_8)
              .build();
-        databazka = databazaHelper;
+        databazka = database;
         detector = FirebaseVision.getInstance().getVisionBarcodeDetector();
 
     }

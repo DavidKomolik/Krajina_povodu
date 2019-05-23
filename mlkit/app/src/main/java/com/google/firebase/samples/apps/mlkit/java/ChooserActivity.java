@@ -32,7 +32,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.samples.apps.mlkit.Databaza.DatabazaHelper;
 import com.google.firebase.samples.apps.mlkit.R;
 
 import java.io.File;

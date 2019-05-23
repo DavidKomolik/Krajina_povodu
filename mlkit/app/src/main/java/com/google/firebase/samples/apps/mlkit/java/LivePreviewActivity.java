@@ -37,7 +37,6 @@ import android.widget.ToggleButton;
 import com.google.android.gms.common.annotation.KeepName;
 import com.google.firebase.ml.common.FirebaseMLException;
 import com.google.firebase.samples.apps.mlkit.Databaza.DatabaseHelper;
-import com.google.firebase.samples.apps.mlkit.Databaza.DatabazaHelper;
 import com.google.firebase.samples.apps.mlkit.R;
 import com.google.firebase.samples.apps.mlkit.common.CameraSource;
 import com.google.firebase.samples.apps.mlkit.common.CameraSourcePreview;
@@ -180,24 +179,6 @@ public final class LivePreviewActivity extends AppCompatActivity
     startCameraSource();
   }
 
-  private boolean kopirujDatabazu(Context context){
-    try {
-      InputStream inputStream = context.getAssets().open(DatabazaHelper.db_nazov);
-      String nazovSuboru = DatabazaHelper.db_cesta + DatabazaHelper.db_nazov;
-      OutputStream outputStream = new FileOutputStream(nazovSuboru);
-      byte[] buffer = new byte[1024];
-      int dlzka = 0;
-      while ((dlzka = inputStream.read(buffer)) > 0) {
-        outputStream.write(buffer,0,dlzka);
-      }
-      Log.v("Main","Databazka skopirovana");
-      outputStream.flush();
-      outputStream.close();
-      return true;
-    } catch (Exception e){
-      return false;
-    }
-  }
 
 
   private void createCameraSource(String model) {
