@@ -13,6 +13,8 @@
 // limitations under the License.
 package com.google.firebase.samples.apps.mlkit.java.barcodescanning;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,6 +27,7 @@ import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode;
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetector;
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetectorOptions;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.samples.apps.mlkit.Databaza.DatabazaHelper;
 import com.google.firebase.samples.apps.mlkit.common.CameraImageGraphic;
 import com.google.firebase.samples.apps.mlkit.common.FrameMetadata;
 import com.google.firebase.samples.apps.mlkit.common.GraphicOverlay;
@@ -41,14 +44,17 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
     private static final String TAG = "BarcodeScanProc";
 
     private final FirebaseVisionBarcodeDetector detector;
+    private SQLiteDatabase databazka;
 
-    public BarcodeScanningProcessor() {
+    public BarcodeScanningProcessor(SQLiteDatabase databazaHelper) {
         // Note that if you know which format of barcode your app is dealing with, detection will be
         // faster to specify the supported barcode formats one by one, e.g.
          new FirebaseVisionBarcodeDetectorOptions.Builder()
              .setBarcodeFormats(FirebaseVisionBarcode.FORMAT_EAN_13,FirebaseVisionBarcode.FORMAT_EAN_8)
              .build();
+        databazka = databazaHelper;
         detector = FirebaseVision.getInstance().getVisionBarcodeDetector();
+
     }
 
     @Override
@@ -78,9 +84,15 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
         }
         for (int i = 0; i < barcodes.size(); ++i) { //maybe i < 2  -> dont want to support multiple barcodes
             FirebaseVisionBarcode barcode = barcodes.get(i);
+
             BarcodeGraphic barcodeGraphic = new BarcodeGraphic(graphicOverlay, barcode);
             graphicOverlay.add(barcodeGraphic);
-            Log.d(TAG,"sucess PRESIEL SOM ");
+            Cursor c = databazka.rawQuery("SELECT KRAJINA FROM EAN_KOD WHERE _id = " + (barcode.getRawValue().substring(0,3)),null);
+            c.moveToFirst();
+            String vysledok = c.getString(0);
+            Log.d(TAG,"Precitane : " + vysledok);
+
+
         }
         graphicOverlay.postInvalidate();
 

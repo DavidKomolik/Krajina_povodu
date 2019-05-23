@@ -16,6 +16,8 @@ package com.google.firebase.samples.apps.mlkit.java;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -29,10 +31,13 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.gms.common.annotation.KeepName;
 import com.google.firebase.ml.common.FirebaseMLException;
+import com.google.firebase.samples.apps.mlkit.Databaza.DatabaseHelper;
+import com.google.firebase.samples.apps.mlkit.Databaza.DatabazaHelper;
 import com.google.firebase.samples.apps.mlkit.R;
 import com.google.firebase.samples.apps.mlkit.common.CameraSource;
 import com.google.firebase.samples.apps.mlkit.common.CameraSourcePreview;
@@ -44,7 +49,11 @@ import com.google.firebase.samples.apps.mlkit.java.facedetection.FaceDetectionPr
 import com.google.firebase.samples.apps.mlkit.java.imagelabeling.ImageLabelingProcessor;
 import com.google.firebase.samples.apps.mlkit.java.textrecognition.TextRecognitionProcessor;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,6 +78,11 @@ public final class LivePreviewActivity extends AppCompatActivity
   private CameraSourcePreview preview;
   private GraphicOverlay graphicOverlay;
   private String selectedModel = FACE_CONTOUR;
+  //private DatabazaHelper databazaHelper;
+
+
+  private DatabaseHelper databazaHelper;
+  private SQLiteDatabase mDb;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +129,21 @@ public final class LivePreviewActivity extends AppCompatActivity
     } else {
       getRuntimePermissions();
     }
+
+
+    this.databazaHelper = new DatabaseHelper(this);
+
+    try {
+      this.databazaHelper.updateDataBase();
+    } catch (IOException mIOException) {
+      throw new Error("UnableToUpdateDatabase");
+    }
+
+    try {
+      mDb = this.databazaHelper.getWritableDatabase();
+    } catch (SQLException mSQLException) {
+      throw mSQLException;
+    }
   }
 
   @Override
@@ -151,6 +180,26 @@ public final class LivePreviewActivity extends AppCompatActivity
     startCameraSource();
   }
 
+  private boolean kopirujDatabazu(Context context){
+    try {
+      InputStream inputStream = context.getAssets().open(DatabazaHelper.db_nazov);
+      String nazovSuboru = DatabazaHelper.db_cesta + DatabazaHelper.db_nazov;
+      OutputStream outputStream = new FileOutputStream(nazovSuboru);
+      byte[] buffer = new byte[1024];
+      int dlzka = 0;
+      while ((dlzka = inputStream.read(buffer)) > 0) {
+        outputStream.write(buffer,0,dlzka);
+      }
+      Log.v("Main","Databazka skopirovana");
+      outputStream.flush();
+      outputStream.close();
+      return true;
+    } catch (Exception e){
+      return false;
+    }
+  }
+
+
   private void createCameraSource(String model) {
     // If there's no existing cameraSource, create one.
     if (cameraSource == null) {
@@ -177,7 +226,7 @@ public final class LivePreviewActivity extends AppCompatActivity
           break;
         case BARCODE_DETECTION:
           Log.i(TAG, "Using Barcode Detector Processor");
-          cameraSource.setMachineLearningFrameProcessor(new BarcodeScanningProcessor());
+          cameraSource.setMachineLearningFrameProcessor(new BarcodeScanningProcessor(this.mDb));
           break;
         case IMAGE_LABEL_DETECTION:
           Log.i(TAG, "Using Image Label Detector Processor");

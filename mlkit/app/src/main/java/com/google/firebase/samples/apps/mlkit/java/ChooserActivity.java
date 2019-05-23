@@ -30,9 +30,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.samples.apps.mlkit.Databaza.DatabazaHelper;
 import com.google.firebase.samples.apps.mlkit.R;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,10 +77,11 @@ public final class ChooserActivity extends AppCompatActivity
 //    listView.setAdapter(adapter);
 //    listView.setOnItemClickListener(this);
 
+
+
     if (!allPermissionsGranted()) {
       getRuntimePermissions();
     }
-
     startActivity(new Intent(this,LivePreviewActivity.class));
   }
 
@@ -83,6 +90,9 @@ public final class ChooserActivity extends AppCompatActivity
     Class<?> clicked = CLASSES[position];
     startActivity(new Intent(this, clicked));
   }
+
+
+
 
   private String[] getRequiredPermissions() {
     try {
