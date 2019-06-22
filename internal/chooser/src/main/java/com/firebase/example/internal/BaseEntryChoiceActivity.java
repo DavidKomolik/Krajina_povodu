@@ -15,11 +15,11 @@ public abstract class BaseEntryChoiceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//TODO automaticky vybrat prvu volbu
+
         setContentView(R.layout.activity_entry_choice);
 
         mRecycler = findViewById(R.id.choices_recycler);
-        mRecycler.setLayoutManager(new LinearLayoutManager(this));
+//        mRecycler.setLayoutManager(new LinearLayoutManager(this));
         mRecycler.setAdapter(new ChoiceAdapter(this, getChoices()));
     }
 

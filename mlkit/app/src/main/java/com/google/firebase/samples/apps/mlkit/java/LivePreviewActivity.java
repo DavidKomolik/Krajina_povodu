@@ -127,7 +127,7 @@ public final class LivePreviewActivity extends AppCompatActivity
     try {
       this.databazaHelper.updateDataBase();
     } catch (IOException mIOException) {
-      throw new Error("UnableToUpdateDatabase");
+      throw new Error("Nemozno updatnut databazu");
     }
 
     try {

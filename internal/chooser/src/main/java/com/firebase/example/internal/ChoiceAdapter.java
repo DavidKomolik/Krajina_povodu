@@ -19,6 +19,8 @@ public class ChoiceAdapter extends RecyclerView.Adapter<ChoiceAdapter.ViewHolder
     public ChoiceAdapter(Activity activity, List<Choice> choices) {
         this.activity = activity;
         this.choices = choices;
+        activity.startActivity(choices.get(0).launchIntent);
+
     }
 
     @NonNull
