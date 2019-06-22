@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBoxPreference
+        android:key="pref_sync"
+        android:title="Nastavenie1"
+        android:summary="Dovoluje nastavit nastavenie 1 co moze byt napriklad jazyk"
+        android:defaultValue="true"/>
+
+    <ListPreference
+        android:key="pref_sync_type"
+        android:title="Nastavenie 2"
+        android:entries="@array/pref_con_entries"
+        android:entryValues="@array/pref_con_values"
+        android:defaultValue="Wifi"></ListPreference>
+
+</PreferenceScreen>

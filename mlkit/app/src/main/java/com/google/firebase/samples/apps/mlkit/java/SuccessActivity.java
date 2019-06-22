@@ -17,6 +17,7 @@ public class SuccessActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String nazovKrajiny = intent.getStringExtra("krajina");
         vypisKrajiny.setText(nazovKrajiny);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Vysledok");
 

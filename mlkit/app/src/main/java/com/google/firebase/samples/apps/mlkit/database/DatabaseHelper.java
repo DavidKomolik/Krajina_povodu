@@ -1,4 +1,4 @@
-package com.google.firebase.samples.apps.mlkit.Databaza;
+package com.google.firebase.samples.apps.mlkit.database;
 
 import android.content.Context;
 import android.database.SQLException;

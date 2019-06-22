@@ -13,8 +13,8 @@
 // limitations under the License.
 package com.google.firebase.samples.apps.mlkit.java;
 
-import android.app.ActionBar;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.database.SQLException;
@@ -40,24 +40,15 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.gms.common.annotation.KeepName;
-import com.google.firebase.ml.common.FirebaseMLException;
-import com.google.firebase.samples.apps.mlkit.Databaza.DatabaseHelper;
+import com.google.firebase.samples.apps.mlkit.database.DatabaseHelper;
 import com.google.firebase.samples.apps.mlkit.R;
 import com.google.firebase.samples.apps.mlkit.common.CameraSource;
 import com.google.firebase.samples.apps.mlkit.common.CameraSourcePreview;
 import com.google.firebase.samples.apps.mlkit.common.GraphicOverlay;
 import com.google.firebase.samples.apps.mlkit.java.barcodescanning.BarcodeScanningProcessor;
-import com.google.firebase.samples.apps.mlkit.java.custommodel.CustomImageClassifierProcessor;
-import com.google.firebase.samples.apps.mlkit.java.facedetection.FaceContourDetectorProcessor;
-import com.google.firebase.samples.apps.mlkit.java.facedetection.FaceDetectionProcessor;
-import com.google.firebase.samples.apps.mlkit.java.imagelabeling.ImageLabelingProcessor;
-import com.google.firebase.samples.apps.mlkit.java.textrecognition.TextRecognitionProcessor;
+import com.google.firebase.samples.apps.mlkit.java.settings.SettingsActivity;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -205,6 +196,9 @@ public final class LivePreviewActivity extends AppCompatActivity
     switch (item.getItemId()){
       case R.id.about:
         Toast.makeText(this,"O nas", Toast.LENGTH_SHORT).show();
+        return true;
+      case R.id.settings:
+        startActivity(new Intent(this, SettingsActivity.class));
         return true;
     default:return true;
     }

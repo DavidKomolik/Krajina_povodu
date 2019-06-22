@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ML Kit Demo</string>
+    <string name="app_name">Krajina Povodu</string>
     <string name="picture">Picture</string>
     <string name="help_text">
       <b>HDR Viewfinder Demo:</b>\n\n
@@ -20,6 +20,18 @@
     </string>
 
     <string name="info">Info</string>
+
+    <string-array name="pref_con_entries">
+        <item>WiFi</item>
+        <item>Data</item>
+        <item>Oboje</item>
+    </string-array>
+
+    <string-array name="pref_con_values">
+        <item>WiFi</item>
+        <item>Data</item>
+        <item>Wifi_data</item>
+    </string-array>
 
     <string name="camera_permission_rationale">This sample app requires camera access in order to
         demo the API.</string>
