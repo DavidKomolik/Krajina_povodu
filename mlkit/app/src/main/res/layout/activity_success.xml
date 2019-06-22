@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".java.SuccessActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" ></include>
+
     <ImageView
         android:id="@+id/imageViewVlajka"
         android:layout_width="wrap_content"
@@ -41,13 +45,5 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="288dp"
-        tools:layout_editor_absoluteY="645dp" />
 
 </android.support.constraint.ConstraintLayout>

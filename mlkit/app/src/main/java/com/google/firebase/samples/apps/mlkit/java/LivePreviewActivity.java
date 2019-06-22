@@ -13,6 +13,7 @@
 // limitations under the License.
 package com.google.firebase.samples.apps.mlkit.java;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -24,7 +25,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -73,8 +78,15 @@ public final class LivePreviewActivity extends AppCompatActivity
   private CameraSourcePreview preview;
   private GraphicOverlay graphicOverlay;
   private String selectedModel = FACE_CONTOUR;
-  //private DatabazaHelper databazaHelper;
 
+
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.live_menu,menu);
+    return true;
+  }
 
   private DatabaseHelper databazaHelper;
   private SQLiteDatabase mDb;
@@ -85,6 +97,10 @@ public final class LivePreviewActivity extends AppCompatActivity
     Log.d(TAG, "onCreate");
 
     setContentView(R.layout.activity_live_preview);
+
+    Toolbar toolbar = findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
+
 
     preview = (CameraSourcePreview) findViewById(R.id.firePreview);
     if (preview == null) {
@@ -137,6 +153,7 @@ public final class LivePreviewActivity extends AppCompatActivity
     }
   }
 
+
   @Override
   public synchronized void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
     // An item was selected. You can retrieve the selected item using
@@ -180,6 +197,17 @@ public final class LivePreviewActivity extends AppCompatActivity
     }
     Log.i(TAG, "Using Barcode Detector Processor");
     cameraSource.setMachineLearningFrameProcessor(new BarcodeScanningProcessor(this,this.mDb));
+
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()){
+      case R.id.about:
+        Toast.makeText(this,"O nas", Toast.LENGTH_SHORT).show();
+        return true;
+    default:return true;
+    }
 
   }
 
