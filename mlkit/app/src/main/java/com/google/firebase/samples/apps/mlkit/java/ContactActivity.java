@@ -1,11 +1,12 @@
 package com.google.firebase.samples.apps.mlkit.java;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.google.firebase.samples.apps.mlkit.R;
 
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 
 public class ContactActivity extends AppCompatActivity {
 private RecyclerView recyclerView;
-private RecyclerView.Adapter adapter;
+private ContactsAdapter adapter;
 private RecyclerView.LayoutManager layoutManager;
 
 
@@ -30,9 +31,18 @@ private RecyclerView.LayoutManager layoutManager;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        ArrayList<ContactItem> contactItems = new ArrayList<>();
-        contactItems.add(new ContactItem(R.drawable.ic_email,"Line 1","Line 2"));
-        contactItems.add(new ContactItem(R.drawable.ic_facebook,"Line 3","Line 4"));
+        final ArrayList<ContactItem> contactItems = new ArrayList<>();
+        contactItems.add(new ContactItem(R.drawable.ic_email,"Email","Kontaktujte nas Emailom"));
+        contactItems.add(new ContactItem(R.drawable.ic_facebook,"Facebook","Sme aj na Facebooku"));
+        contactItems.add(new ContactItem(R.drawable.ic_instagram,"Instagram","Dajte nám follow :)"));
+        contactItems.add(new ContactItem(R.drawable.ic_twitter,"Twitter","Dajte nám follow :)"));
+        contactItems.add(new ContactItem(R.drawable.ic_github,"Github","Pozrite si našu prácu"));
+        contactItems.add(new ContactItem(R.drawable.ic_gplay,"Google Play","Pozrite si našu prácu"));
+        contactItems.add(new ContactItem(R.drawable.ic_youtube,"Youtube","Pozrite si našu prácu"));
+        contactItems.add(new ContactItem(R.drawable.ic_github,"Github","Pozrite si našu prácu"));
+
+
+
 
         recyclerView =  findViewById(R.id.recViewContacts);
         recyclerView.setHasFixedSize(true);
@@ -42,5 +52,25 @@ private RecyclerView.LayoutManager layoutManager;
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
+        adapter.setOnItemClickLietener(new ContactsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                if (position == 0) {
+                    Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                    emailIntent.setData(Uri.parse("mailto:"));
+                    emailIntent.setType("text/plain");
+                    emailIntent.putExtra(Intent.EXTRA_EMAIL,new String[] {"Mrkvicka@gmail.com"});
+                    emailIntent.putExtra(Intent.EXTRA_SUBJECT,"Ahoj");
+                    startActivity(emailIntent);
+                }
+            }
+        });
+
     }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
 }

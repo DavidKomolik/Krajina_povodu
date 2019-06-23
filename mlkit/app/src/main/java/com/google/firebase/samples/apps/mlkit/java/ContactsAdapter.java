@@ -15,19 +15,45 @@ import java.util.ArrayList;
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder> {
 
 private ArrayList<ContactItem> contactItems;
+private OnItemClickListener listener;
 
-    public static class ContactsViewHolder extends RecyclerView.ViewHolder{
-        public ImageView imageView;
-        public TextView bigger;
-        public TextView smaller;
 
-        public ContactsViewHolder(@NonNull View itemView) {
+    // parent activity will implement this method to respond to click events
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickLietener(OnItemClickListener listener){
+        this.listener = listener;
+    }
+
+
+    public static class ContactsViewHolder extends RecyclerView.ViewHolder {
+        private ImageView imageView;
+        private TextView bigger;
+        private TextView smaller;
+
+        public ContactsViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             imageView = itemView.findViewById(R.id.contactImgView);
             bigger = itemView.findViewById(R.id.textViewContactBigger);
             smaller = itemView.findViewById(R.id.textViewContactSmaller);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int pos = getAdapterPosition();
+                        if (pos != RecyclerView.NO_POSITION){
+                            listener.onItemClick(pos);
+                        }
+                    }
+                }
+            });
         }
+
     }
+
+
 
     public ContactsAdapter(ArrayList<ContactItem> items){
 
@@ -38,7 +64,7 @@ private ArrayList<ContactItem> contactItems;
     @Override
     public ContactsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.contact_item, viewGroup, false);
-        ContactsViewHolder viewHolder = new ContactsViewHolder(v);
+        ContactsViewHolder viewHolder = new ContactsViewHolder(v, this.listener);
         return viewHolder;
     }
 
@@ -51,8 +77,12 @@ private ArrayList<ContactItem> contactItems;
         contactsViewHolder.bigger.setText(current.getTextBigger());
     }
 
+
+
     @Override
     public int getItemCount() {
         return contactItems.size();
     }
+
+
 }
