@@ -195,11 +195,12 @@ public final class LivePreviewActivity extends AppCompatActivity
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()){
       case R.id.about:
-        Toast.makeText(this,"O nas", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, AboutActivity.class));
         return true;
       case R.id.settings:
         startActivity(new Intent(this, SettingsActivity.class));
         return true;
+
     default:return true;
     }
 

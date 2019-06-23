@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
+        android:layout_marginStart="2dp"
         android:layout_marginTop="56dp">
 
         <com.google.firebase.samples.apps.mlkit.common.GraphicOverlay
@@ -31,15 +31,7 @@
             android:layout_alignParentBottom="true" />
     </com.google.firebase.samples.apps.mlkit.common.CameraSourcePreview>
 
-  <TextView android:id="@+id/text"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:paddingLeft="80dp"
-      android:textColor="#FFF"
-      android:textSize="20sp"
-      android:textStyle="bold" />
-
-  <FrameLayout
+    <FrameLayout
       android:id="@+id/control"
       android:layout_width="match_parent"
       android:layout_height="60dp"
@@ -48,24 +40,17 @@
       android:layout_toEndOf="@id/firePreview"
       android:background="#000">
 
-      <Spinner
-          android:id="@+id/spinner"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:visibility="invisible" />
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignTop="@+id/control"
+            android:layout_alignEnd="@+id/control"
+            android:text="Nasmerujte kameru na EAN kód"
+            android:textAlignment="center"
+            android:textColor="#FDFDFE"
+            android:textSize="24sp" />
 
-      <ToggleButton
-          android:id="@+id/facingSwitch"
-          android:layout_width="48dp"
-          android:layout_height="48dp"
-          android:layout_gravity="center_vertical"
-          android:background="@layout/toggle_style"
-          android:checked="false"
-          android:textOff=""
-          android:textOn=""
-          android:visibility="invisible" />
-
-  </FrameLayout>
+    </FrameLayout>
 
 </RelativeLayout>

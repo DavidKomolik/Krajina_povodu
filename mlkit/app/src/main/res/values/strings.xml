@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Krajina Povodu</string>
+    <string name="app_name">Krajina Pôvodu</string>
     <string name="picture">Picture</string>
     <string name="help_text">
       <b>HDR Viewfinder Demo:</b>\n\n
@@ -32,6 +32,10 @@
         <item>Data</item>
         <item>Wifi_data</item>
     </string-array>
+
+    <string name="author">Dávid Komolík</string>
+    <string name="version">Verzia 1.0</string>
+    <string name="year">© 2019</string>
 
     <string name="camera_permission_rationale">This sample app requires camera access in order to
         demo the API.</string>

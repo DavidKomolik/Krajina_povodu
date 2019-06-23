@@ -1,4 +1,4 @@
-package com.google.firebase.samples.apps.mlkit.java.settings;
+package com.google.firebase.samples.apps.mlkit.java;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,27 +6,21 @@ import android.support.v7.widget.Toolbar;
 
 import com.google.firebase.samples.apps.mlkit.R;
 
-public class SettingsActivity extends AppCompatActivity {
+public class AboutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_about);
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Nastavenia");
+        toolbar.setTitle("O aplikácii");
 
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        if (findViewById(R.id.fragment_cont) != null){
-            if (savedInstanceState != null)
-                return;
-
-            getFragmentManager().beginTransaction().add(R.id.fragment_cont,new SettingsFragment()).commit();
-        }
     }
 
     @Override
@@ -34,4 +28,7 @@ public class SettingsActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
+
+
 }
