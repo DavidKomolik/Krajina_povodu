@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context = "com.google.firebase.samples.apps.mlkit.java.ContactActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_launcher" />
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" ></include>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recViewContacts"
+        android:layout_width="match_parent"
+        android:layout_height="456dp"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="false"
+        android:layout_marginBottom="50"
+        android:background="@android:color/darker_gray"
+        android:padding="4dp"
+        android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
+</RelativeLayout>

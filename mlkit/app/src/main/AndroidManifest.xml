@@ -14,7 +14,8 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/MaterialTheme">
-        <activity android:name=".java.AboutActivity"></activity>
+        <activity android:name=".java.ContactActivity"></activity>
+        <activity android:name=".java.AboutActivity" />
         <activity android:name=".java.settings.SettingsActivity" />
         <activity android:name=".java.SuccessActivity" />
 

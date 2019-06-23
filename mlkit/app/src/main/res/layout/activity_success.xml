@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar" ></include>
+        layout="@layout/toolbar"></include>
 
     <ImageView
         android:id="@+id/imageViewVlajka"
@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="297dp"
-        android:text="Krajina povodu produktu :"
+        android:text="@string/krajina_povodu_produktu"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -37,13 +37,13 @@
         android:id="@+id/textViewNazovKrajiny"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="355dp"
+        android:layout_marginTop="24dp"
         android:text="TextView"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewText" />
 
 </android.support.constraint.ConstraintLayout>
