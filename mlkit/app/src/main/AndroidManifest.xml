@@ -50,7 +50,6 @@
             android:value="barcode,face,ocr,ica" />
 
         <activity android:name=".java.ChooserActivity" />
-        <activity android:name=".kotlin.ChooserActivity" />
         <activity
             android:name=".EntryChoiceActivity"
             android:exported="true"
@@ -64,15 +63,7 @@
         <activity
             android:name=".java.LivePreviewActivity"
             android:exported="true" />
-        <activity
-            android:name=".kotlin.LivePreviewActivity"
-            android:exported="true" />
-        <activity
-            android:name=".java.StillImageActivity"
-            android:exported="true" />
-        <activity
-            android:name=".kotlin.StillImageActivity"
-            android:exported="true" />
+
     </application>
 
 </manifest>

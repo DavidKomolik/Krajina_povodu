@@ -52,7 +52,7 @@ public final class ChooserActivity extends AppCompatActivity
 
   private static final Class<?>[] CLASSES =
       new Class<?>[] {
-        LivePreviewActivity.class, StillImageActivity.class,
+        LivePreviewActivity.class,
       };
 
   private static final int[] DESCRIPTION_IDS =
