@@ -13,16 +13,13 @@ public class SuccessActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_success);
-        TextView vypisKrajiny= (TextView) findViewById(R.id.textViewNazovKrajiny);
+        TextView vypisKrajiny= findViewById(R.id.textViewNazovKrajiny);
         Intent intent = getIntent();
         String nazovKrajiny = intent.getStringExtra("krajina");
         vypisKrajiny.setText(nazovKrajiny);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Vysledok");
-
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }

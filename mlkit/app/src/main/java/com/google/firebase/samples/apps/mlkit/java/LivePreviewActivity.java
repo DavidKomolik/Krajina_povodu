@@ -36,15 +36,14 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.gms.common.annotation.KeepName;
-import com.google.firebase.samples.apps.mlkit.database.DatabaseHelper;
 import com.google.firebase.samples.apps.mlkit.R;
 import com.google.firebase.samples.apps.mlkit.common.CameraSource;
 import com.google.firebase.samples.apps.mlkit.common.CameraSourcePreview;
 import com.google.firebase.samples.apps.mlkit.common.GraphicOverlay;
+import com.google.firebase.samples.apps.mlkit.database.DatabaseHelper;
 import com.google.firebase.samples.apps.mlkit.java.barcodescanning.BarcodeScanningProcessor;
 import com.google.firebase.samples.apps.mlkit.java.settings.SettingsActivity;
 
@@ -52,8 +51,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Demo app showing the various features of ML Kit for Firebase. This class is used to
- * set up continuous frame processing on frames from a camera source. */
+/** This class is used to set up continuous frame processing on frames from a camera source. */
 @KeepName
 public final class LivePreviewActivity extends AppCompatActivity
         implements OnRequestPermissionsResultCallback,
@@ -93,16 +91,16 @@ public final class LivePreviewActivity extends AppCompatActivity
     setSupportActionBar(toolbar);
 
 
-    preview = (CameraSourcePreview) findViewById(R.id.firePreview);
+    preview = findViewById(R.id.firePreview);
     if (preview == null) {
       Log.d(TAG, "Preview is null");
     }
-    graphicOverlay = (GraphicOverlay) findViewById(R.id.fireFaceOverlay);
+    graphicOverlay = findViewById(R.id.fireFaceOverlay);
     if (graphicOverlay == null) {
       Log.d(TAG, "graphicOverlay is null");
     }
 
-    Spinner spinner = (Spinner) findViewById(R.id.spinner);
+    Spinner spinner = findViewById(R.id.spinner);
     List<String> options = new ArrayList<>();
 
     options.add(BARCODE_DETECTION);
@@ -115,7 +113,7 @@ public final class LivePreviewActivity extends AppCompatActivity
     spinner.setAdapter(dataAdapter);
     spinner.setOnItemSelectedListener(this);
 
-    ToggleButton facingSwitch = (ToggleButton) findViewById(R.id.facingSwitch);
+    ToggleButton facingSwitch = findViewById(R.id.facingSwitch);
     facingSwitch.setOnCheckedChangeListener(this);
     // Hide the toggle button if there is only 1 camera
     if (Camera.getNumberOfCameras() == 1) {
@@ -191,6 +189,7 @@ public final class LivePreviewActivity extends AppCompatActivity
 
   }
 
+
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()){
@@ -202,7 +201,6 @@ public final class LivePreviewActivity extends AppCompatActivity
         return true;
       case R.id.contact :
        startActivity(new Intent(this,ContactActivity.class));
-        //startActivity(new Intent(this,MapsActivity.class));
         return true;
 
     default:return true;

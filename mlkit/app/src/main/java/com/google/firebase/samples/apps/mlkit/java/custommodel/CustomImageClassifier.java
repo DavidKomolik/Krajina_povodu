@@ -224,11 +224,11 @@ public class CustomImageClassifier {
                             public List<String> then(Task<FirebaseModelOutputs> task) throws Exception {
                                 if (mUseQuantizedModel) {
                                     byte[][] labelProbArray =
-                                            task.getResult().<byte[][]>getOutput(0);
+                                            task.getResult().getOutput(0);
                                     return getTopLabels(labelProbArray);
                                 } else {
                                     float[][] labelProbArray =
-                                            task.getResult().<float[][]>getOutput(0);
+                                            task.getResult().getOutput(0);
                                     return getTopLabels(labelProbArray);
 
                                 }
