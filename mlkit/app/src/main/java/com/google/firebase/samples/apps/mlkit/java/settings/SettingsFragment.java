@@ -7,6 +7,9 @@ import androidx.annotation.Nullable;
 
 import com.google.firebase.samples.apps.mlkit.R;
 
+/**
+ * One setting fragment, which contains data
+ */
 public class SettingsFragment extends PreferenceFragment {
 
 

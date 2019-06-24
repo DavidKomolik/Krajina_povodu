@@ -1,5 +1,9 @@
 package com.google.firebase.samples.apps.mlkit.java;
 
+
+/**
+ * Describes and handles one Contact us item in Recycler View
+ */
 public class ContactItem {
     private int imgResource;
     private String textBigger;

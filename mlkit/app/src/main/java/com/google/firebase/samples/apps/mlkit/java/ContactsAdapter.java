@@ -12,10 +12,14 @@ import com.google.firebase.samples.apps.mlkit.R;
 
 import java.util.ArrayList;
 
+
+/**
+ * Adapter which connects and binds data between Recycler view holder and contacts view holder
+ */
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder> {
 
-private ArrayList<ContactItem> contactItems;
-private OnItemClickListener listener;
+    private ArrayList<ContactItem> contactItems;
+    private OnItemClickListener listener;
 
 
     // parent activity will implement this method to respond to click events
@@ -23,7 +27,7 @@ private OnItemClickListener listener;
         void onItemClick(int position);
     }
 
-    public void setOnItemClickLietener(OnItemClickListener listener){
+    public void setOnItemClickLietener(OnItemClickListener listener) {
         this.listener = listener;
     }
 
@@ -43,19 +47,17 @@ private OnItemClickListener listener;
                 public void onClick(View v) {
                     if (listener != null) {
                         int pos = getAdapterPosition();
-                        if (pos != RecyclerView.NO_POSITION){
+                        if (pos != RecyclerView.NO_POSITION) {
                             listener.onItemClick(pos);
                         }
                     }
                 }
             });
         }
-
     }
 
 
-
-    public ContactsAdapter(ArrayList<ContactItem> items){
+    public ContactsAdapter(ArrayList<ContactItem> items) {
 
         this.contactItems = items;
     }
@@ -76,8 +78,6 @@ private OnItemClickListener listener;
         contactsViewHolder.smaller.setText(current.getTextSmaller());
         contactsViewHolder.bigger.setText(current.getTextBigger());
     }
-
-
 
     @Override
     public int getItemCount() {

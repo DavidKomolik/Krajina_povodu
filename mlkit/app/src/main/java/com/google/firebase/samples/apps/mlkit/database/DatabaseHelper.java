@@ -11,6 +11,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+
+/**
+ * Class used to load .db file from file located in assets
+ */
+
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static String DB_NAME = "databaza.db";
     private static String DB_PATH = "";
@@ -22,10 +27,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
-        if (android.os.Build.VERSION.SDK_INT >= 17)
-            DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
-        else
-            DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
+        DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
+
         this.mContext = context;
 
         copyDataBase();
@@ -33,7 +36,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         this.getReadableDatabase();
     }
 
-    public void updateDataBase() throws IOException {
+    /**
+     * Updates the database
+     */
+    public void updateDataBase() {
         if (mNeedUpdate) {
             File dbFile = new File(DB_PATH + DB_NAME);
             if (dbFile.exists())
@@ -57,7 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             try {
                 copyDBFile();
             } catch (IOException mIOException) {
-                throw new Error("ErrorCopyingDataBase");
+                throw new Error("Error Copying DataBase");
             }
         }
     }
@@ -75,6 +81,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         mInput.close();
     }
 
+    /**
+     * Open database from already specified Path
+     */
     public boolean openDataBase() throws SQLException {
         mDataBase = SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.CREATE_IF_NECESSARY);
         return mDataBase != null;

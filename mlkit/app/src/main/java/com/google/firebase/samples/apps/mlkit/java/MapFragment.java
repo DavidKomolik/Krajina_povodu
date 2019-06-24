@@ -15,7 +15,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.firebase.samples.apps.mlkit.R;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple Fragment subclass, not yet used but intended for later use.
  */
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
@@ -36,7 +36,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             mapFragment = SupportMapFragment.newInstance();
-            fragmentTransaction.replace(R.id.map,mapFragment).commit();
+            fragmentTransaction.replace(R.id.map, mapFragment).commit();
         }
         mapFragment.getMapAsync(this);
         return v;

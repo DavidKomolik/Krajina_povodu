@@ -1,24 +1,30 @@
 package com.google.firebase.samples.apps.mlkit.java;
+
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.google.firebase.samples.apps.mlkit.R;
 
+
+/**
+ * Activity which contains Success page.
+ * Handles and gets result from database
+ */
 public class SuccessActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_success);
-        TextView vypisKrajiny= findViewById(R.id.textViewNazovKrajiny);
+        TextView countryNameView = findViewById(R.id.countryNameView);
         Intent intent = getIntent();
-        String nazovKrajiny = intent.getStringExtra("krajina");
-        vypisKrajiny.setText(nazovKrajiny);
+        String country = intent.getStringExtra("krajina");
+        countryNameView.setText(country);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Vysledok");
+        toolbar.setTitle("Výsledok");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

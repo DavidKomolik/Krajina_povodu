@@ -13,14 +13,11 @@
 // limitations under the License.
 package com.google.firebase.samples.apps.mlkit.java.barcodescanning;
 
-import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.ml.vision.FirebaseVision;
@@ -32,7 +29,6 @@ import com.google.firebase.samples.apps.mlkit.common.CameraImageGraphic;
 import com.google.firebase.samples.apps.mlkit.common.FrameMetadata;
 import com.google.firebase.samples.apps.mlkit.common.GraphicOverlay;
 import com.google.firebase.samples.apps.mlkit.java.LivePreviewActivity;
-import com.google.firebase.samples.apps.mlkit.java.SuccessActivity;
 import com.google.firebase.samples.apps.mlkit.java.SuccessHandler;
 import com.google.firebase.samples.apps.mlkit.java.VisionProcessorBase;
 
@@ -95,7 +91,7 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
             graphicOverlay.add(barcodeGraphic);
             String action;
 
-            this.handler.spracujVysledok(barcode.getRawValue(),context);
+            this.handler.processResult(barcode.getRawValue(), context);
         }
         graphicOverlay.postInvalidate();
 
