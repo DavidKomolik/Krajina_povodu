@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.firebase.samples.apps.mlkit.R;
 import com.google.firebase.samples.apps.mlkit.java.settings.SettingsActivity;
@@ -65,11 +67,14 @@ private RecyclerView.LayoutManager layoutManager;
                     emailIntent.putExtra(Intent.EXTRA_SUBJECT,"Ahoj");
                     startActivity(emailIntent);
                 }
+            }
+        });
 
-                if (position == 5) {
-
-                    //startActivity(new Intent(this,ContactActivity.class));
-                }
+        Button mapButton = findViewById(R.id.mapButton);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ContactActivity.this,MapsActivity.class));
             }
         });
 

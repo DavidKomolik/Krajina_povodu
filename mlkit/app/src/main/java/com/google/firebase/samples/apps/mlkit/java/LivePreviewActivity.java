@@ -201,8 +201,8 @@ public final class LivePreviewActivity extends AppCompatActivity
         startActivity(new Intent(this, SettingsActivity.class));
         return true;
       case R.id.contact :
-       // startActivity(new Intent(this,ContactActivity.class));
-        startActivity(new Intent(this,MapActivity.class));
+       startActivity(new Intent(this,ContactActivity.class));
+        //startActivity(new Intent(this,MapsActivity.class));
         return true;
 
     default:return true;
