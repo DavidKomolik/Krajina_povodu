@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.google.firebase.samples.apps.mlkit.R;
+import com.google.firebase.samples.apps.mlkit.java.settings.SettingsActivity;
 
 import java.util.ArrayList;
 
@@ -38,6 +39,7 @@ private RecyclerView.LayoutManager layoutManager;
         contactItems.add(new ContactItem(R.drawable.ic_twitter,"Twitter","Dajte nám follow :)"));
         contactItems.add(new ContactItem(R.drawable.ic_github,"Github","Pozrite si našu prácu"));
         contactItems.add(new ContactItem(R.drawable.ic_gplay,"Google Play","Pozrite si našu prácu"));
+        contactItems.add(new ContactItem(R.drawable.ic_gplay,"Maps","Tu nás nájdete"));
         contactItems.add(new ContactItem(R.drawable.ic_youtube,"Youtube","Pozrite si našu prácu"));
         contactItems.add(new ContactItem(R.drawable.ic_github,"Github","Pozrite si našu prácu"));
 
@@ -62,6 +64,11 @@ private RecyclerView.LayoutManager layoutManager;
                     emailIntent.putExtra(Intent.EXTRA_EMAIL,new String[] {"Mrkvicka@gmail.com"});
                     emailIntent.putExtra(Intent.EXTRA_SUBJECT,"Ahoj");
                     startActivity(emailIntent);
+                }
+
+                if (position == 5) {
+
+                    //startActivity(new Intent(this,ContactActivity.class));
                 }
             }
         });

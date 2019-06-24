@@ -59,4 +59,7 @@
     <string name="desc_still_image_activity">Vision detectors demo with a still image</string>
     <string name="krajina_povodu_produktu">Krajina povodu produktu :</string>
     <string name="guide">   Nasmerujte kameru na EAN kód</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
